@@ -2,7 +2,7 @@ import spacy
 import json
 from backend.app.database import get_db
 from backend.app.models import Countries, Locations
-from sqlalchemy import select
+from sqlalchemy import select, func
 import logging
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -13,10 +13,10 @@ db = next(get_db())
 def setup():
     logging.info('Setup start')
     logging.info('Extracting location names')
-    data = db.execute(select(Locations.name).distinct()).scalars()
+    query = select(func.lower(Locations.name)).distinct()
+    data = db.execute(query).scalars().all()
     logging.info('Location names extracted')
-    name_data = [x.lower() for x in data if x]
-    set1 = set(name_data)
+    set1 = set(data)
     logging.info('Extracting country names')
     data = db.execute(select(Countries.COUNTRY)).scalars()
     logging.info('Country names extracted')
