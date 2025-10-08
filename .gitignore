@@ -1,5 +1,6 @@
 .env
-backend/data/.
+backend/data/
+!backend/data/.gitkeep
 backend/tests
 
 .venv
