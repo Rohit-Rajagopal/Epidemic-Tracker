@@ -19,9 +19,9 @@ class Locations(Base):
     index: Mapped[int] = mapped_column(Integer, primary_key=True)
     geonameID: Mapped[int] = mapped_column(Integer)
     name: Mapped[str] = mapped_column(String)
-    ascii_name: Mapped[str] = mapped_column(String, key="asciiName")  # maps to asciiName in DB
-    alternate_names: Mapped[str] = mapped_column(String, key="alternateNames")  # maps to alternateNames
+    ascii_name: Mapped[str] = mapped_column("asciiName", String)  # maps to asciiName in DB
+    alternate_names: Mapped[str] = mapped_column("alternateNames", String)  # maps to alternateNames
     latitude: Mapped[float] = mapped_column(Float)
     longitude: Mapped[float] = mapped_column(Float)
-    country_code: Mapped[str] = mapped_column(String, key="country code")  # maps to 'country code'
+    country_code: Mapped[str] = mapped_column("country code", String)  # maps to 'country code'
     timezone: Mapped[str] = mapped_column(String)
