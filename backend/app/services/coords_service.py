@@ -39,7 +39,7 @@ def get_coords(countries, areas):
 def generate_coords():
     logging.info('Starting coordinates retrieval process')
 
-    with open('../../data/nlp.json', 'r') as file:
+    with open('../../data/nlp2.json', 'r') as file:
         data = json.load(file)
 
     res = []
@@ -61,7 +61,7 @@ def generate_coords():
 
     js = {'entries': res}
 
-    with open('../../data/coords.json', 'w', encoding='utf-8') as file:
+    with open('../../data/coords2.json', 'w', encoding='utf-8') as file:
         json.dump(js, file)
 
     logging.info('Coordinates retrieval process complete')

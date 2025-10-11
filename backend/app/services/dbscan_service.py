@@ -20,7 +20,7 @@ def get_labels(coords):
 
 
 def find_clusters():
-    with open('../../data/coords.json', 'r') as file:
+    with open('../../data/coords2.json', 'r') as file:
         data = json.load(file)
 
     coords = []
@@ -41,7 +41,7 @@ def find_clusters():
     for i in range(len(coords)):
         d[int(labels[i])].append(coords[i])
 
-    with open('../../data/clusters.json', 'w') as file:
+    with open('../../data/clusters2.json', 'w') as file:
         json.dump(d, file)
 
 

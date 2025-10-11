@@ -4,7 +4,7 @@ import json
 
 def sort_entries_by_location():
 
-    with open('../../data/coords.json', 'r') as file:
+    with open('../../data/coords2.json', 'r') as file:
         data = json.load(file)
 
     area_coords = defaultdict(list)
@@ -40,7 +40,7 @@ def sort_entries_by_location():
 
         js = {'areas': res}
 
-        with open('../../data/entries_by_location.json', 'w') as file:
+        with open('../../data/entries_by_location2.json', 'w') as file:
             json.dump(js, file)
 
 
