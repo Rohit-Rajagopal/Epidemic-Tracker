@@ -7,7 +7,7 @@ router = APIRouter(prefix='/locations')
 
 @router.get('/')
 def get_locations():
-    file_path = Path(__file__).resolve().parents[2] / "data" / "coords.json"
+    file_path = Path(__file__).resolve().parents[2] / "data" / "coords2.json"
     with open(file_path, 'r') as file:
         data = json.load(file)
 
@@ -16,7 +16,7 @@ def get_locations():
 
 @router.get('/entries_by_location')
 def get_entries_by_location():
-    file_path = Path(__file__).resolve().parents[2] / "data" / "entries_by_location.json"
+    file_path = Path(__file__).resolve().parents[2] / "data" / "entries_by_location2.json"
     with open(file_path, 'r') as file:
         data = json.load(file)
 

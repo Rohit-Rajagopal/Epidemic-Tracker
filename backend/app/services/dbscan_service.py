@@ -11,7 +11,7 @@ def get_labels(coords):
     earth_radius = 6371000.0
     eps_radians = eps_meters / earth_radius
 
-    min_samples = 5
+    min_samples = 15
 
     db = DBSCAN(eps=eps_radians, min_samples=min_samples, metric='haversine')
     db.fit(coords_rad)
@@ -25,10 +25,10 @@ def find_clusters():
 
     coords = []
     for entry in data['entries']:
-        for value in entry['countries'].values():
-            if value[0] == 0 and value[1] == 0:
-                continue
-            coords.append(value)
+        # for value in entry['countries'].values():
+        #     if value[0] == 0 and value[1] == 0:
+        #         continue
+        #     coords.append(value)
         for value in entry['areas'].values():
             if value[0] == 0 and value[1] == 0:
                 continue
