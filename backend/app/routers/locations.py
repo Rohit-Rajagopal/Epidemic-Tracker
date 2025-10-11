@@ -12,3 +12,12 @@ def get_locations():
         data = json.load(file)
 
     return data
+
+
+@router.get('/entries_by_location')
+def get_entries_by_location():
+    file_path = Path(__file__).resolve().parents[2] / "data" / "entries_by_location.json"
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+
+    return data
