@@ -4,6 +4,7 @@ from backend.app.database import get_db
 from backend.app.models import Countries, Locations
 from sqlalchemy import select, func
 import logging
+import trafilatura
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 nlp = spacy.load("en_core_web_lg")
@@ -36,11 +37,18 @@ def setup_iso():
     return d
 
 
+def extract_news(url):
+    downloaded = trafilatura.fetch_url(url)
+    text = trafilatura.extract(downloaded)
+    return text
+
+
 name_set, country_set = setup()
 country_iso = setup_iso()
 
 
 def extract_locations(text, origin):
+    logging.info('Extracting locations')
     doc = nlp(text)
     locations = []
     prev = None
@@ -55,6 +63,7 @@ def extract_locations(text, origin):
         elif word.ent_type_ == "NORP" and word in name_set:
             locations.append(word.text)
         prev = word
+    locations = list(set(locations))
     countries = []
     areas = []
     for area in locations:
@@ -64,6 +73,7 @@ def extract_locations(text, origin):
             areas.append(area)
     if not countries and origin != '':
         countries.append(country_iso[origin.lower()])
+    logging.info('Location extraction complete')
     return countries, areas
 
 
@@ -77,7 +87,13 @@ def get_locations():
     i = 1
     for entry in data['entries']:
         logging.info(f'Processing entry {i}')
-        countries, areas = extract_locations(entry['title'], entry['country'])
+        logging.info('Fetching article contents from url')
+        text = extract_news(entry['url'])
+        logging.info('Article Contents fetched')
+        full_text = entry['title']
+        if text:
+            full_text += '\n' + text
+        countries, areas = extract_locations(full_text, entry['country'])
         d = {
             'title': entry['title'],
             'url': entry['url'],
@@ -89,7 +105,7 @@ def get_locations():
 
     js = {'entries': res}
 
-    with open("../../data/nlp.json", 'w', encoding='utf-8') as file:
+    with open("../../data/nlp2.json", 'w', encoding='utf-8') as file:
         json.dump(js, file)
 
     logging.info('NLP end')
