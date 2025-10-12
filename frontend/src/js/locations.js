@@ -30,7 +30,6 @@ function addCircles(data) {
         }).addTo(map);
         circle.obj = area
         circle.on('click', (e) => {
-            console.log(e.target.obj)
             dialogName.textContent = e.target.obj.name;
             const ol = document.createElement("ol");
             for (let entry of e.target.obj.entries) {

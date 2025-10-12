@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
     entry: {
         main: "./src/index.js",
-        locations: "./src/js/locations.js"
+        locations: "./src/js/locations.js",
+        cluster: "./src/js/cluster.js",
     },
     output: {
         filename: "[name].js",
@@ -21,6 +22,11 @@ module.exports = {
             template: "./src/html/locations.html",
             filename: "locations.html",
             chunks: ["locations"],
+        }),
+        new HtmlWebpackPlugin ({
+            template: "./src/html/cluster.html",
+            filename: "cluster.html",
+            chunks: ["cluster"],
         }),
     ],
     module: {
