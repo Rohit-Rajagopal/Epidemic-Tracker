@@ -24,12 +24,13 @@ function getClusters() {
 function plotClusters(data) {
     for (let val in data) {
         const color = (val === '-1')? "gray": "red";
+        const rad = (val === '-1')? 5: 15;
         for (let coords of data[val]) {
             const circle = L.circleMarker([coords[0], coords[1]], {
             color: color,
             fillColor: color,
             fillOpacity: 0.5,
-            radius: 5
+            radius: rad,
         }).addTo(map);
         }
     }

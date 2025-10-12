@@ -24,12 +24,13 @@ function initializeMap() {
 
 function addCircles(data) {
     for (let area of data) {
-        let coords = area.coords
+        let coords = area.coords;
+        let rad = Math.min(area.entries.length * 5, 20)
         const circle = L.circleMarker([coords[0], coords[1]], {
             color: 'red',
             fillColor: '#f03',
             fillOpacity: 0.5,
-            radius: 5
+            radius: rad,
         }).addTo(map);
         circle.obj = area
         circle.on('click', (e) => {
