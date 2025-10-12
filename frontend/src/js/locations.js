@@ -1,4 +1,5 @@
 import { locations_url } from "./config";
+import "../css/locations.css";
 
 const dialog = document.querySelector("dialog");
 const dialogName = dialog.querySelector('p.name');

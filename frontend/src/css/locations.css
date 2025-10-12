@@ -1,0 +1,74 @@
+dialog {
+  border: none;
+  border-radius: 12px;
+  padding: 25px 30px;
+  background-color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 600px;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* Backdrop blur for focus */
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+}
+
+/* Title (area name) */
+dialog .name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Entries container */
+dialog .entries {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Style for the ordered list inside entries */
+dialog .entries ol {
+  list-style: decimal inside;
+  padding-left: 0;
+  margin: 0;
+}
+
+/* Each list item (news entry) */
+dialog .entries li {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+dialog .entries li:hover {
+  background-color: #eef3f8;
+}
+
+/* News links */
+dialog .entries a {
+  text-decoration: none;
+  color: #0077cc;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  word-wrap: break-word;
+}
+
+dialog .entries a:hover {
+  color: #005fa3;
+  text-decoration: underline;
+}
+
+/* Subtle open animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
