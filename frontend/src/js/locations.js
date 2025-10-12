@@ -10,27 +10,14 @@ class Area {
     }
 }
 
-const map = L.map('map').setView([51.505, -0.09], 5);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
-
-data = '';
-fetch('https://optionally-resolved-cicada.ngrok-free.app/locations/entries_by_location', {
-    headers: {
-        "ngrok-skip-browser-warning": 1,
-    }
-})
-.then((response) => response.json())
-.then((text) => {
-    data = text
-})
-.then(() => {
-    addCircles(createAreas(data))
-})
-
-
+function initializeMap() {
+    const map = L.map('map').setView([51.505, -0.09], 5);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    return map;
+}
 
 function addCircles(data) {
     for (let area of data) {
@@ -70,3 +57,23 @@ function createAreas(data) {
     }
     return allAreas;
 }
+
+function getAreas() {
+    data = '';
+    fetch('https://optionally-resolved-cicada.ngrok-free.app/locations/entries_by_location', {
+        headers: {
+            "ngrok-skip-browser-warning": 1,
+        }
+    })
+    .then((response) => response.json())
+    .then((text) => {
+        data = text
+    })
+    .then(() => {
+        addCircles(createAreas(data))
+    })
+}
+
+
+map = initializeMap();
+getAreas();
