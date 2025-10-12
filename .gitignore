@@ -6,3 +6,8 @@ backend/tests
 .venv
 *.db
 *.db-journal
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
