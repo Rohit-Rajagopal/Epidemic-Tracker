@@ -1,3 +1,5 @@
+import { locations_url } from "./config";
+
 const dialog = document.querySelector("dialog");
 const dialogName = dialog.querySelector('p.name');
 const dialogEntries = dialog.querySelector('.entries');
@@ -21,7 +23,7 @@ function initializeMap() {
 
 function addCircles(data) {
     for (let area of data) {
-        coords = area.coords
+        let coords = area.coords
         const circle = L.circleMarker([coords[0], coords[1]], {
             color: 'red',
             fillColor: '#f03',
@@ -49,30 +51,26 @@ function addCircles(data) {
 
 
 function createAreas(data) {
-    allAreas = [];
+    const allAreas = [];
     for (let area of data['areas']) {
-        newArea = new Area(area);
+        const newArea = new Area(area);
         allAreas.push(newArea);
     }
     return allAreas;
 }
 
 function getAreas() {
-    data = '';
-    fetch('https://optionally-resolved-cicada.ngrok-free.app/locations/entries_by_location', {
+    fetch(locations_url, {
         headers: {
             "ngrok-skip-browser-warning": 1,
         }
     })
     .then((response) => response.json())
-    .then((text) => {
-        data = text
-    })
-    .then(() => {
+    .then((data) => {
         addCircles(createAreas(data))
     })
 }
 
 
-map = initializeMap();
+const map = initializeMap();
 getAreas();

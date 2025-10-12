@@ -1,3 +1,5 @@
+import { clusters_url } from "./config";
+
 function initializeMap() {
     const map = L.map('map').setView([51.505, -0.09], 5);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -8,17 +10,13 @@ function initializeMap() {
 }
 
 function getClusters() {
-    data = '';
-    fetch('https://optionally-resolved-cicada.ngrok-free.app/clusters', {
+    fetch(clusters_url, {
         headers: {
             "ngrok-skip-browser-warning": 1,
         }
     })
     .then((response) => response.json())
-    .then((text) => {
-        data = text;
-    })
-    .then(() => {
+    .then((data) => {
         plotClusters(data);
     })
 }
@@ -37,5 +35,5 @@ function plotClusters(data) {
     }
 }
 
-map = initializeMap();
+const map = initializeMap();
 getClusters();
