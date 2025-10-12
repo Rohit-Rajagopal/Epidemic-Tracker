@@ -9,4 +9,4 @@ const locations_url = backend_endpoint + locations_route;
 const clusters_url = backend_endpoint + clusters_route;
 
 
-export { locations_url, clusters_url };
+export { locations_url, clusters_url, backend_endpoint };
