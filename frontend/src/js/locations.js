@@ -1,0 +1,72 @@
+const dialog = document.querySelector("dialog");
+const dialogName = dialog.querySelector('p.name');
+const dialogEntries = dialog.querySelector('.entries');
+
+class Area {
+    constructor(data) {
+        this.name = data['area'];
+        this.coords = data['coordinates'];
+        this.entries = data['entries'];
+    }
+}
+
+const map = L.map('map').setView([51.505, -0.09], 5);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+data = '';
+fetch('https://optionally-resolved-cicada.ngrok-free.app/locations/entries_by_location', {
+    headers: {
+        "ngrok-skip-browser-warning": 1,
+    }
+})
+.then((response) => response.json())
+.then((text) => {
+    data = text
+})
+.then(() => {
+    addCircles(createAreas(data))
+})
+
+
+
+function addCircles(data) {
+    for (let area of data) {
+        coords = area.coords
+        const circle = L.circleMarker([coords[0], coords[1]], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 5
+        }).addTo(map);
+        circle.obj = area
+        circle.on('click', (e) => {
+            console.log(e.target.obj)
+            dialogName.textContent = e.target.obj.name;
+            const ol = document.createElement("ol");
+            for (let entry of e.target.obj.entries) {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.textContent = entry["title"];
+                a.href = entry["url"];
+                li.appendChild(a)
+                ol.appendChild(li)
+            }
+            dialogEntries.innerHTML = '';
+            dialogEntries.appendChild(ol);
+            dialog.showModal();
+        })
+    }
+}
+
+
+function createAreas(data) {
+    allAreas = [];
+    for (let area of data['areas']) {
+        newArea = new Area(area);
+        allAreas.push(newArea);
+    }
+    return allAreas;
+}
