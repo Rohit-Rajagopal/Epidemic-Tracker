@@ -9,12 +9,12 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(title="Epidemic Mapping System")
 
 origins = [
-    "http://localhost:3000",        # React dev server
+    "http://localhost:3000",
     "http://localhost:8080",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:8080",
-    "https://optionally-resolved-cicada.ngrok-free.app",  # replace with your real ngrok URL
-    "null"  # if loading frontend directly from file://
+    "https://optionally-resolved-cicada.ngrok-free.app",
+    "null",
 ]
 
 app.add_middleware(
