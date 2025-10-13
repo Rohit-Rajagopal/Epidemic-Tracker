@@ -11,3 +11,4 @@ backend/tests
 __pycache__/
 *.py[cod]
 *.pyo
+*.pyc
