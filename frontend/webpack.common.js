@@ -6,6 +6,7 @@ module.exports = {
         main: "./src/index.js",
         locations: "./src/js/locations.js",
         cluster: "./src/js/cluster.js",
+        add_news: "./src/js/add_news.js",
     },
     output: {
         filename: "[name].js",
@@ -27,6 +28,11 @@ module.exports = {
             template: "./src/html/cluster.html",
             filename: "cluster.html",
             chunks: ["cluster"],
+        }),
+        new HtmlWebpackPlugin ({
+            template: "./src/html/add_news.html",
+            filename: "add_news.html",
+            chunks: ["add_news"],
         }),
     ],
     module: {

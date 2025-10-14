@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Add News Report</h1>
+        <form id="newsForm">
+            <label for="area">Area:</label>
+            <input type="text" id="area" name="area" required>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" required>
+
+            <label for="title">News Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="url">URL:</label>
+            <input type="url" id="url" name="url" placeholder="Optional">
+
+            <button type="submit">Submit</button>
+        </form>
+        <p id="responseMsg"></p>
+    </div>
+</body>
+</html>
