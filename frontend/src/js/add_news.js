@@ -8,14 +8,22 @@ document.getElementById("newsForm").addEventListener("submit", async function(e)
     const title = document.getElementById("title").value;
     const url = document.getElementById("url").value || "";
 
-    const payload = { area, country, title, url };
+    const payload = {
+        "area": area,
+        "country": country,
+        "news": title,
+        "url": url
+    };
 
     const responseMsg = document.getElementById("responseMsg");
 
     try {
         const response = await fetch(add_news_url, { // change URL to your API
             method: "POST",
-            headers: { "ngrok-skip-browser-warning": 1, },
+            headers: { 
+                "ngrok-skip-browser-warning": 1,
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify(payload)
         });
 
