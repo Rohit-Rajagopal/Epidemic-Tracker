@@ -29,19 +29,19 @@ def sort_entries_by_location():
                 'url': entry['url'],
             })
 
-        res = []
-        for area, entries in area_entries.items():
-            d = {
-                'area': area,
-                'coordinates': area_coords[area],
-                'entries': entries
-            }
-            res.append(d)
+    res = []
+    for area, entries in area_entries.items():
+        d = {
+            'area': area,
+            'coordinates': area_coords[area],
+            'entries': entries
+        }
+        res.append(d)
 
-        js = {'areas': res}
+    js = {'areas': res}
 
-        with open('../../data/entries_by_location2.json', 'w') as file:
-            json.dump(js, file)
+    with open('../../data/entries_by_location2.json', 'w') as file:
+        json.dump(js, file)
 
 
 if __name__ == "__main__":

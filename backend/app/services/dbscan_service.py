@@ -2,6 +2,12 @@ import json
 import numpy as np
 from sklearn.cluster import DBSCAN
 from collections import defaultdict
+from pathlib import Path
+
+
+def get_file_path_from_data(file_name):
+    file_path = Path(__file__).resolve().parents[2] / "data" / file_name
+    return file_path
 
 
 def get_labels(coords):
@@ -19,8 +25,8 @@ def get_labels(coords):
     return labels
 
 
-def find_clusters():
-    with open('../../data/coords2.json', 'r') as file:
+def find_clusters(input_file="coords2.json", output_file="clusters2.json"):
+    with open(get_file_path_from_data(input_file), 'r') as file:
         data = json.load(file)
 
     coords = []
@@ -41,7 +47,7 @@ def find_clusters():
     for i in range(len(coords)):
         d[int(labels[i])].append(coords[i])
 
-    with open('../../data/clusters2.json', 'w') as file:
+    with open(get_file_path_from_data(output_file), 'w') as file:
         json.dump(d, file)
 
 
