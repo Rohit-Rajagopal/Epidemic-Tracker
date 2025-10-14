@@ -14,5 +14,8 @@ class Report(BaseModel):
 
 @router.post("/")
 def add_user_report(report: Report):
-    add_report(report.area, report.country, report.news, report.url)
-    return {"success": True, "message": "User report added successfully."}
+    res = add_report(report.area, report.country, report.news, report.url)
+    if res:
+        return {"success": True, "message": "User report added successfully."}
+    else:
+        return {"success": False, "message": "Report not added"}
