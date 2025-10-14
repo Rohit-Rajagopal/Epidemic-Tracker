@@ -16,8 +16,11 @@ document.getElementById("newsForm").addEventListener("submit", async function(e)
     };
 
     const responseMsg = document.getElementById("responseMsg");
+    const submitButton = document.querySelector("button");
 
     try {
+        responseMsg.textContent = "Submitting...";
+        submitButton.disabled = true;
         const response = await fetch(add_news_url, { // change URL to your API
             method: "POST",
             headers: { 
@@ -35,6 +38,7 @@ document.getElementById("newsForm").addEventListener("submit", async function(e)
             responseMsg.style.color = "red";
             responseMsg.textContent = "Failed to submit news report.";
         }
+        submitButton.disabled = false;
     } catch (error) {
         responseMsg.style.color = "red";
         responseMsg.textContent = "Error: Could not connect to server.";
