@@ -32,7 +32,7 @@ This project combines real-time news data, NLP, and geospatial clustering to hig
 
 ### 1. Clone the Repo
 ```bash
-git clone https://github.com/yourusername/epidemic-tracker.git
+git clone https://github.com/Rohit-Rajagopal/Epidemic-Tracker.git
 cd epidemic-tracker
 ```
 
@@ -52,7 +52,9 @@ npm install
 npm run dev
 ```
 
-Visit: **http://localhost:8080**
+Visit: **http://localhost:8000**
+
+Note: The url in the frontend needs to be replaced with your own link for the backend.
 
 ---
 
